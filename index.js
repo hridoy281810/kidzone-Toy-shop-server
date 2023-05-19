@@ -76,11 +76,6 @@ async function run() {
 
     //  privet route with email 
       app.get('/myToys/:email' , async(req,res)=>{
-      //  console.log(req.params.email)
-      //  const type = req.query.type === 'ascending';
-      //  const value = req.query.value;
-      //  const sortData = {}
-      //  sortData[value]= type ? 1: -1;
        const result = await  toyCollection.find( {email : req.params.email} ).sort({price: -1}).toArray();
        res.send(result)
     })
