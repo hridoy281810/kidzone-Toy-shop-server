@@ -38,13 +38,13 @@ async function run() {
           { toyName: { $regex: searchText, $options: 'i' } }
         ]
       }).toArray()
-     res.json(result)
+      res.json(result)
     })
 
     // all toys api 
     app.get('/allToys', async (req, res) => {
       const result = await toyCollection.find().limit(20).toArray()
-     res.json(result)
+      res.json(result)
     })
 
     //  tab with toy category name 
@@ -65,13 +65,13 @@ async function run() {
         return res.status(404).send({ message: 'body not found' })
       }
       const result = await toyCollection.insertOne(body)
-     res.json(result)
+      res.json(result)
     })
 
     //  privet route with email 
     app.get('/myToys/:email', async (req, res) => {
       const result = await toyCollection.find({ email: req.params.email }).sort({ price: -1 }).toArray();
-     res.json(result)
+      res.json(result)
     })
 
     //  update api 
@@ -92,7 +92,7 @@ async function run() {
         },
       }
       const result = await toyCollection.updateOne(filter, updateDoc, option)
-     res.json(result)
+      res.json(result)
     })
 
     // all toy by  id
@@ -100,7 +100,7 @@ async function run() {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) }
       const result = await toyCollection.findOne(query)
-     res.json(result)
+      res.json(result)
     })
 
     // delete api 
@@ -109,7 +109,7 @@ async function run() {
       console.log('please delete', id)
       const query = { _id: new ObjectId(id) }
       const result = await toyCollection.deleteOne(query)
-     res.json(result)
+      res.json(result)
 
     })
 
@@ -124,7 +124,7 @@ async function run() {
 run().catch(console.dir);
 //  surver running test
 app.get('/', (req, res) => {
- res.send('toy shop server is running')
+  res.send('toy shop server is running')
 })
 app.listen(port, () => {
   console.log(`Toy shop server is running on PORT: ${port}`)
