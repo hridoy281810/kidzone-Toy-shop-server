@@ -25,11 +25,10 @@ async function run() {
     // client.connect();
 
     const toyCollection = client.db('toyShop').collection('toyDb')
-    console.log(toyCollection)
 
-    const indexKeys = { toyName: 1 };
-    const indexOption = { name: 'toyName' };
-    const result = await toyCollection.createIndex(indexKeys, indexOption)
+    // const indexKeys = { toyName: 1 };
+    // const indexOption = { name: 'toyName' };
+    // const result = await toyCollection.createIndex(indexKeys, indexOption)
 
     //  search with toy name 
     app.get('/toyNameSearch/:text', async (req, res) => {
@@ -53,10 +52,10 @@ async function run() {
       console.log(req.params.category)
       if (req.params.category === 'Teddy Bear' || req.params.category === 'Horse' || req.params.category === 'Cat') {
         const result = await toyCollection.find({ category: req.params.category }).toArray()
-        returnres.json(result)
+        return res.json(result)
       }
       const result = await toyCollection.find().toArray()
-      returnres.json(result)
+      return res.json(result)
     })
 
     //  post toy api 
@@ -115,8 +114,8 @@ async function run() {
     })
 
     // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    // await client.db("admin").command({ ping: 1 });
+    // console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
